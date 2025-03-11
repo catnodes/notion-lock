@@ -29,7 +29,10 @@
       <div class="mb-3">
         <button id="go" class="btn btn-primary">Generate Text</button>
         <button onclick="copy()" class="btn btn-success ms-2">Copy to Clipboard</button>
-        <button onclick="downloadResult()" class="btn btn-secondary ms-2">Download as File</button>
+        
+    <input type="text" id="filenameInput" class="form-control d-inline-block w-auto me-2" placeholder="Nama file (tanpa .txt)" style="width: 200px;">
+    <button onclick="downloadResult()" class="btn btn-secondary">Download as File</button>
+    
       </div>
       <h5>Result:</h5>
       <div id="result" class="border p-2 rounded bg-light" style="white-space: pre-wrap;"></div>
@@ -77,7 +80,10 @@
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = "encrypted_text.txt";
+        
+    const filename = document.getElementById("filenameInput").value || "encrypted_text";
+    link.download = filename + ".txt";
+    
         link.click();
         URL.revokeObjectURL(url);
       }
